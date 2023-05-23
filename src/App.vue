@@ -13,15 +13,18 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { reqLogin } from '@/api/user'
+// @ts-ignore
+import { ElMessage } from 'element-plus'
 
 onMounted(() => {
-  reqLogin({ username: 'admin', password: '111111' })
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+  reqLogin({ username: 'admin', password: '111111' }).then((res) => {
+    console.log(res)
+    if (res.code === 200) {
+      ElMessage.success('登录成功')
+    } else {
+      ElMessage.error('登录失败')
+    }
+  })
 })
 </script>
 

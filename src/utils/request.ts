@@ -16,23 +16,20 @@ request.interceptors.response.use(
     return response.data
   },
   (error) => {
-    let msg = ''
+    let message = ''
     let status = error.response.status
     switch (status) {
       case 401:
-        msg = 'token 过期'
+        message = 'token 过期'
         break
       case 403:
-        msg = '暂无权限'
+        message = '暂无权限'
         break
       case 404:
-        msg = '请求错误'
+        message = '请求错误'
         break
     }
-    ElMessage({
-      type: 'error',
-      msg,
-    })
+    ElMessage.error(message)
     return Promise.reject(error)
   },
 )

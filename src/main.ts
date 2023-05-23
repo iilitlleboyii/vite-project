@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
+// 引入全局样式和变量
 import '@/styles/index.scss'
 
 // 引入element-plus插件及样式
