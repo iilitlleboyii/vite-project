@@ -1,8 +1,8 @@
 import axios from 'axios'
-// @ts-ignore
+// @ts-expect-error 等待作者更新或者自己写个d.ts声明
 import { ElMessage } from 'element-plus'
 
-let request = axios.create({
+const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
 })
@@ -17,7 +17,7 @@ request.interceptors.response.use(
   },
   (error) => {
     let message = ''
-    let status = error.response.status
+    const status = error.response.status
     switch (status) {
       case 401:
         message = 'token 过期'
