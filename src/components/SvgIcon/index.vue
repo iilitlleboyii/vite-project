@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg aria-hidden="true" :style="{ width, height }">
+    <svg class="use-svg" aria-hidden="true" :style="{ fontSize }">
       <use :xlink:href="xlink_href" :fill="color"></use>
     </svg>
   </div>
@@ -13,13 +13,11 @@ const props = withDefaults(
   defineProps<{
     iconName: string
     color?: string
-    width?: string
-    height?: string
+    fontSize?: string
   }>(),
   {
     color: 'red',
-    width: '20px',
-    height: '20px',
+    fontSize: '20px',
   },
 )
 
@@ -28,4 +26,9 @@ const xlink_href = computed(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.use-svg {
+  width: 1em;
+  height: 1em;
+}
+</style>

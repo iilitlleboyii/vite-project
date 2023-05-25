@@ -20,10 +20,10 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'virtual:svg-icons-register'
 
 // 引入自定义插件对象，注册整个项目全局组件
-import globalComponent from '@/components'
+import globalComponent from './components'
 
 // 引入vue-router
-import router from '@/router'
+import router from './router'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

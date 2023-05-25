@@ -1,21 +1,17 @@
 // scr/router/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
-
-const routes = [
-  {
-    name: 'login',
-    path: '/',
-    component: () => import('@/views/login/login.vue'),
-    meta: {
-      title: '登录',
-      authRequired: false,
-    },
-  },
-]
+import { baseRoutes } from './routes'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: routes,
+  routes: baseRoutes,
+  scrollBehavior: () => {
+    return {
+      left: 0,
+      top: 0,
+      behavior: 'smooth',
+    }
+  },
 })
 
 export default router

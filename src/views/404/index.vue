@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h1>404路由</h1>
+    <h1>SVG全局挂载使用</h1>
+    <SvgIcon iconName="phone" color="green"></SvgIcon>
+    <SvgIcon iconName="phone" color="red" fontSize="50px"></SvgIcon>
     <div style="width: 800px; height: 400px">
       <Echarts :options="options"></Echarts>
     </div>
@@ -25,4 +29,8 @@ const options = reactive({
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+h1 {
+  color: $color;
+}
+</style>
