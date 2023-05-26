@@ -4,6 +4,7 @@ import type { loginForm, loginResponseData, userResponseData } from './type'
 enum API {
   LOGIN_URL = '/user/login',
   USERINFO_URL = '/user/info',
+  VERIFYCODE = '/user/code',
 }
 
 export const reqLogin = (data: loginForm) =>
@@ -11,3 +12,5 @@ export const reqLogin = (data: loginForm) =>
 
 export const reqUserInfo = () =>
   request.get<any, userResponseData>(API.USERINFO_URL)
+
+export const reqVerifyCode = () => request.get<any, any>(API.VERIFYCODE)

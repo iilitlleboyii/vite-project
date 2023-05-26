@@ -1,12 +1,12 @@
-//用户信息数据
+// 用户信息数据
 function createUserList() {
   return [
     {
       userId: 1,
       avatar:
         'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      username: 'admin',
-      password: '111111',
+      username: 'demo',
+      password: 'demo',
       desc: '平台管理员',
       roles: ['平台管理员'],
       buttons: ['cuser.detail'],
@@ -26,6 +26,16 @@ function createUserList() {
       token: 'System Token',
     },
   ]
+}
+
+// 验证码生成
+function generateCode() {
+  let code = ''
+  const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
+  for (let i = 0; i < 4; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return code
 }
 
 export default [
@@ -64,6 +74,15 @@ export default [
       }
       //如果有返回成功信息
       return { code: 200, data: { checkUser } }
+    },
+  },
+  // 获取验证码
+  {
+    url: '/api/user/code',
+    method: 'get',
+    response: (request) => {
+      let verifyCode = generateCode()
+      return { code: 200, data: { verifyCode } }
     },
   },
 ]

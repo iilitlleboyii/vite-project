@@ -3,7 +3,7 @@
     <div class="login-box">
       <el-row>
         <el-col :span="24">
-          <h1>欢&nbsp;迎&nbsp;登&nbsp;录</h1>
+          <h1>欢&nbsp;迎&nbsp;使&nbsp;用</h1>
         </el-col>
       </el-row>
       <el-row>
@@ -50,7 +50,7 @@
                   size="large"
                 />
               </el-col>
-              <el-col :span="6" style="display: flex; justify-content: right">
+              <el-col :span="6">
                 <el-button class="register-btn" type="primary" link>
                   注册账号
                 </el-button>
@@ -60,6 +60,7 @@
         </el-col>
       </el-row>
     </div>
+    <!-- <img :src="imageSrc" alt="验证码" /> -->
   </div>
 </template>
 
@@ -68,10 +69,10 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 // @ts-ignore
 import type { FormRules, FormInstance } from 'element-plus'
-import { reqLogin } from '@/api/user'
 // @ts-expect-error 等待作者更新或者自己写个d.ts声明
 import { ElMessage } from 'element-plus'
-import $router from '@/router'
+import useUserStore from '@/stores/modules/user'
+import { useRouter } from 'vue-router'
 
 const formRef = ref<FormInstance>()
 const formParams = reactive({
@@ -82,28 +83,62 @@ const formRules = reactive<FormRules>({
   username: [{ required: true, message: '账号必填哦', trigger: 'blur' }],
   password: [{ required: true, message: '密码必填哦', trigger: 'blur' }],
 })
+
 const rememberMe = ref(false)
 const isLoading = ref(false)
+// const imageSrc = ref('')
+
+const $userStore = useUserStore()
+const $router = useRouter()
+
+const login = async () => {
+  try {
+    await $userStore.userLogin(formParams)
+    ElMessage.success('登录成功')
+    $router.replace('/')
+  } catch (error: any) {
+    ElMessage.error(error)
+  }
+}
+
+// const verifyCode = async () => {
+//   try {
+//     const res = await $userStore.checkUser()
+//     codeToImage(res.verifyCode)
+//     console.log(imageSrc)
+//   } catch {}
+// }
 
 const submitForm = async (formEl: FormInstance | undefined) => {
+  // verifyCode()
   if (!formEl) return
   await formEl.validate((valid: boolean) => {
     if (valid) {
       isLoading.value = true
-      reqLogin(formParams).then((res: any) => {
+      setTimeout(() => {
+        login()
         isLoading.value = false
-        if (res.code === 200) {
-          ElMessage.success('登录成功')
-          setTimeout(() => {
-            $router.replace('/')
-          }, 1500)
-        } else {
-          ElMessage.error('登录失败')
-        }
-      })
+      }, 500)
     }
   })
 }
+
+// function codeToImage(code: string) {
+//   const canvas = document.createElement('canvas')
+//   const ctx = canvas.getContext('2d')!
+//   const textWidth = ctx.measureText(code).width
+//   canvas.width = textWidth + 50
+//   canvas.height = 40
+//   ctx.fillStyle = 'rbga(255, 255,255,0)'
+//   ctx.fillRect(0, 0, canvas.width, canvas.height)
+//   ctx.font = 'bold 24px Arial'
+//   ctx.fillStyle = '#333'
+//   ctx.textAlign = 'center'
+//   ctx.textBaseline = 'middle'
+//   ctx.fillText(code, canvas.width / 2, canvas.height / 2)
+//   const imageDataURL = canvas.toDataURL('image/png')
+//   imageSrc.value = imageDataURL
+// }
 </script>
 
 <style scoped lang="scss">
@@ -114,8 +149,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   background-position: center;
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .login-box {
     width: 270px;

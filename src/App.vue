@@ -9,10 +9,3 @@ import { RouterView } from 'vue-router'
 </script>
 
 <style scoped lang="scss"></style>
-
-<style>
-#waifu {
-  left: unset;
-  right: 20px;
-}
-</style>

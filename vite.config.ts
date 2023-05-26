@@ -27,7 +27,7 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: '@import "./src/styles/variable.scss";',
+          additionalData: '@import "./src/styles/variable.scss";', // 引入全局scss变量
         },
       },
     },

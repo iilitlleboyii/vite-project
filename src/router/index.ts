@@ -14,4 +14,18 @@ const router = createRouter({
   },
 })
 
+router.beforeEach((to) => {
+  let token = localStorage.getItem('TOKEN')
+  if (to.name !== 'login') {
+    if (token) {
+      return true
+    } else {
+      router.replace('/login')
+      return true
+    }
+  } else {
+    return true
+  }
+})
+
 export default router
