@@ -1,3 +1,5 @@
+import Layout from '@/components/layout/index.vue'
+
 export const baseRoutes = [
   {
     name: 'login',
@@ -11,6 +13,16 @@ export const baseRoutes = [
   {
     name: 'layout',
     path: '/',
+    component: Layout,
+    meta: {
+      title: '管理页',
+      authRequired: true,
+    },
+  },
+  {
+    name: 'home',
+    path: '/home',
+    alias: '/index',
     component: () => import('@/views/home/index.vue'),
     meta: {
       title: '主页',

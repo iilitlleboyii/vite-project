@@ -14,14 +14,13 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to, from) => {
   let token = localStorage.getItem('TOKEN')
   if (to.name !== 'login') {
     if (token) {
       return true
     } else {
-      router.replace('/login')
-      return true
+      return '/login'
     }
   } else {
     return true
