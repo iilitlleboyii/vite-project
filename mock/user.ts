@@ -28,16 +28,6 @@ function createUserList() {
   ]
 }
 
-// 验证码生成
-function generateCode() {
-  let code = ''
-  const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
-  for (let i = 0; i < 4; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length))
-  }
-  return code
-}
-
 export default [
   // 用户登录接口
   {
@@ -74,15 +64,6 @@ export default [
       }
       //如果有返回成功信息
       return { code: 200, data: { checkUser } }
-    },
-  },
-  // 获取验证码
-  {
-    url: '/api/user/code',
-    method: 'get',
-    response: (request) => {
-      let verifyCode = generateCode()
-      return { code: 200, data: { verifyCode } }
     },
   },
 ]

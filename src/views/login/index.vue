@@ -60,36 +60,47 @@
         </el-col>
       </el-row>
     </div>
-    <!-- <img :src="imageSrc" alt="验证码" /> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 // @ts-ignore
 import type { FormRules, FormInstance } from 'element-plus'
 // @ts-expect-error 等待作者更新或者自己写个d.ts声明
 import { ElMessage } from 'element-plus'
-import useUserStore from '@/stores/modules/user'
+import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
 
+let rememberMe = ref<boolean>()
+let rememberMeStorage = localStorage.getItem('rememberMe')
+rememberMe.value = rememberMeStorage ? JSON.parse(rememberMeStorage) : false
+
+const isLoading = ref(false)
+
+const $userStore = useUserStore()
+const $router = useRouter()
+
 const formRef = ref<FormInstance>()
-const formParams = reactive({
-  username: '',
-  password: '',
-})
 const formRules = reactive<FormRules>({
   username: [{ required: true, message: '账号必填哦', trigger: 'blur' }],
   password: [{ required: true, message: '密码必填哦', trigger: 'blur' }],
 })
+let formParams = reactive({
+  username: '',
+  password: '',
+})
+let formParamsStorage = localStorage.getItem('formParams')
+formParams = formParamsStorage ? JSON.parse(formParamsStorage) : formParams
 
-const rememberMe = ref(false)
-const isLoading = ref(false)
-// const imageSrc = ref('')
-
-const $userStore = useUserStore()
-const $router = useRouter()
+watch(
+  rememberMe,
+  (newValue) => {
+    localStorage.setItem('rememberMe', String(newValue))
+  },
+  { immediate: true },
+)
 
 const login = async () => {
   try {
@@ -101,19 +112,22 @@ const login = async () => {
   }
 }
 
-// const verifyCode = async () => {
-//   try {
-//     const res = await $userStore.checkUser()
-//     codeToImage(res.verifyCode)
-//     console.log(imageSrc)
-//   } catch {}
-// }
-
+/**
+ * 验证表单并提交
+ * @author Yuxianhao <yu.xh00@foxmail.com>
+ * @date 2023-05-28
+ * @param {any} formEl:FormInstance|undefined
+ * @todo 待添加验证码和用户信息加密
+ */
 const submitForm = async (formEl: FormInstance | undefined) => {
-  // verifyCode()
   if (!formEl) return
   await formEl.validate((valid: boolean) => {
     if (valid) {
+      if (rememberMe.value) {
+        localStorage.setItem('formParams', JSON.stringify(formParams))
+      } else {
+        localStorage.removeItem('formParams')
+      }
       isLoading.value = true
       setTimeout(() => {
         login()
@@ -122,23 +136,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     }
   })
 }
-
-// function codeToImage(code: string) {
-//   const canvas = document.createElement('canvas')
-//   const ctx = canvas.getContext('2d')!
-//   const textWidth = ctx.measureText(code).width
-//   canvas.width = textWidth + 50
-//   canvas.height = 40
-//   ctx.fillStyle = 'rbga(255, 255,255,0)'
-//   ctx.fillRect(0, 0, canvas.width, canvas.height)
-//   ctx.font = 'bold 24px Arial'
-//   ctx.fillStyle = '#333'
-//   ctx.textAlign = 'center'
-//   ctx.textBaseline = 'middle'
-//   ctx.fillText(code, canvas.width / 2, canvas.height / 2)
-//   const imageDataURL = canvas.toDataURL('image/png')
-//   imageSrc.value = imageDataURL
-// }
 </script>
 
 <style scoped lang="scss">

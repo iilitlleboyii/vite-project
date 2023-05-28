@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { reqLogin, reqVerifyCode } from '@/api/user'
-const useUserStore = defineStore('userStore', {
+import { reqLogin } from '@/api/user'
+export const useUserStore = defineStore('userStore', {
   state: () => {
-    const token = localStorage.getItem('TOKEN')
+    const token = localStorage.getItem('TOKEN') || ''
     return {
       token,
     }
@@ -18,16 +18,7 @@ const useUserStore = defineStore('userStore', {
         return Promise.reject(res.data.message)
       }
     },
-
-    async checkUser() {
-      let res: any = await reqVerifyCode()
-      if (res.code === 200) {
-        return res.data
-      }
-    },
   },
   getters: {},
   persist: false,
 })
-
-export default useUserStore

@@ -16,15 +16,15 @@ import 'virtual:svg-icons-register'
 // 引入自定义插件对象，注册整个项目全局组件
 import globalComponent from './components'
 
-import router from './router'
 import pinia from './stores'
+import router from './router'
 
 const app = createApp(App)
 app.use(pinia)
+app.use(router)
 app.use(ElementPlus, {
   locale: zhCn,
 })
 app.use(globalComponent)
-app.use(router)
 
 app.mount('#app')

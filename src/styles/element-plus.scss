@@ -4,3 +4,15 @@
 .el-row:last-child {
   margin-bottom: 0;
 }
+
+.el-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.el-aside {
+  height: 100vh;
+}
+.el-menu {
+  border-right: 0 !important;
+}

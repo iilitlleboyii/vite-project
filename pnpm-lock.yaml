@@ -19,9 +19,6 @@ dependencies:
   pinia-plugin-persistedstate:
     specifier: ^3.1.0
     version: 3.1.0(pinia@2.0.28)
-  pinia-plugin-router:
-    specifier: ^0.1.2
-    version: 0.1.2
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -4369,10 +4366,6 @@ packages:
       pinia: ^2.0.0
     dependencies:
       pinia: 2.0.28(typescript@5.0.2)(vue@3.3.4)
-    dev: false
-
-  /pinia-plugin-router@0.1.2:
-    resolution: {integrity: sha512-JyCD/JozqVhaQsN7uqa23ol2lC4o8bSvoPLqDSBHTT9M07XvTp/NqFaDa/3RRh2DSoEhfyIH9Z6d8C9Im1uaTg==}
     dev: false
 
   /pinia@2.0.28(typescript@5.0.2)(vue@3.3.4):

@@ -16,7 +16,7 @@ const props = withDefaults(
     fontSize?: string
   }>(),
   {
-    color: 'red',
+    color: 'black',
     fontSize: '20px',
   },
 )
