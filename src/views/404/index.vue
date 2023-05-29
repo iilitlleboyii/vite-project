@@ -30,7 +30,4 @@ const options = reactive({
 </script>
 
 <style scoped lang="scss">
-h1 {
-  color: $color;
-}
 </style>

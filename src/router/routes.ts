@@ -1,5 +1,5 @@
-import type { MenuItem } from '@/types'
-const baseRoutes: MenuItem[] = [
+import type { MenuItemType } from '@/types'
+const baseRoutes: MenuItemType[] = [
   {
     name: 'login',
     path: '/login',
@@ -16,68 +16,77 @@ const baseRoutes: MenuItem[] = [
     alias: '/index',
     component: () => import('@/views/home/index.vue'),
     meta: {
-      title: '主页',
+      title: '首页',
+      icon: 'House',
       authRequired: true,
+      isExternalLink: false,
     },
   },
   {
-    name: 'layout',
+    name: 'bulletinBoard',
     path: '/',
-    component: () => import('@/components/layout/index.vue'),
+    component: () => import('@/layout/index.vue'),
     meta: {
-      title: '管理页',
+      title: '看板中心',
+      icon: 'DataBoard',
       authRequired: true,
     },
     children: [
       {
-        name: 'test1',
-        path: '/test1',
-        component: () => import('@/views/home/index.vue'),
+        name: 'machineBoard',
+        path: '/machineBoard',
+        component: () => import('@/views/404/index.vue'),
         meta: {
-          title: '测试页1',
+          title: '设备看板',
+          icon: 'Link',
           authRequired: true,
         },
       },
       {
-        name: 'test2',
-        path: '/test2',
-        component: () => import('@/views/home/index.vue'),
+        name: 'orderBoard',
+        path: '/orderBoard',
+        component: () => import('@/views/404/index.vue'),
         meta: {
-          title: '测试页2',
+          title: '订单看板',
+          icon: 'Link',
           authRequired: true,
         },
-      },
-      {
-        name: 'test3',
-        path: '/test3',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '测试页3',
-          authRequired: true,
-        },
-        children: [
-          {
-            name: 'test31',
-            path: '/test31',
-            component: () => import('@/views/home/index.vue'),
-            meta: {
-              title: '测试页31',
-              authRequired: true,
-            },
-          },
-          {
-            name: 'test32',
-            path: '/test32',
-            component: () => import('@/views/home/index.vue'),
-            meta: {
-              title: '测试页32',
-              authRequired: true,
-            },
-          },
-        ],
       },
     ],
   },
+  {
+    name: 'warehouseManagement',
+    path: '/warehouseManagement',
+    component: () => import('@/layout/index.vue'),
+    meta: {
+      title: '仓库管理',
+      icon: 'Setting',
+      authRequired: true,
+    },
+    children: [
+      {
+        name: 'materialInfo',
+        path: '/materialInfo',
+        component: () => import('@/views/404/index.vue'),
+        meta: {
+          title: '物料信息',
+          icon: 'Link',
+          authRequired: true,
+        },
+      },
+      {
+        name: 'wm',
+        path: '/wm',
+        component: () => import('@/views/404/index.vue'),
+        meta: {
+          title: '仓库管理',
+          icon: 'Link',
+          authRequired: true,
+        },
+      },
+    ],
+  },
+
   {
     name: '404',
     path: '/404',
@@ -100,6 +109,6 @@ const baseRoutes: MenuItem[] = [
   },
 ]
 
-const routes = baseRoutes
+const routes: any = baseRoutes
 
 export default routes

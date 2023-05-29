@@ -1,5 +1,5 @@
 import type { DefineComponent } from 'vue'
-export interface MenuItem {
+export interface MenuItemType {
   name: string
   path: string
   alias?: string
@@ -8,7 +8,9 @@ export interface MenuItem {
   hidden?: boolean
   meta: {
     title: string
+    icon?: string
     authRequired: boolean
+    isExternalLink?: boolean
   }
-  children?: MenuItem[]
+  children?: MenuItemType[]
 }

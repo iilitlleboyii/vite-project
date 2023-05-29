@@ -1,3 +1,4 @@
+// 登录框设置的
 .el-row {
   margin-bottom: 15px;
 }
@@ -5,14 +6,47 @@
   margin-bottom: 0;
 }
 
+// 侧边栏设置的
 .el-header {
+  background: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .el-aside {
   height: 100vh;
+  background: $sidebar-background-color;
 }
 .el-menu {
   border-right: 0 !important;
+  a {
+    text-decoration: none;
+  }
+}
+.el-menu-item {
+  color: $sidebar-text-color !important;
+  background: $sidebar-background-color;
+  &:hover {
+    background: $sidebar-background-color-hover !important;
+  }
+  &.is-active {
+    color: $sidebar-text-color-strong !important;
+  }
+}
+
+.el-sub-menu {
+  background: $sidebar-background-color !important;
+  .el-sub-menu__title {
+    color: $sidebar-text-color;
+    &:hover {
+      background: $sidebar-background-color-hover !important;
+    }
+  }
+  .el-menu-item {
+    background: $sidebar-background-color-strong;
+  }
+}
+
+// 头部设置的
+.el-breadcrumb {
+  font-size: 18px !important;
 }
