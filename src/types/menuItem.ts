@@ -11,6 +11,7 @@ export interface MenuItemType {
     icon?: string
     authRequired: boolean
     isExternalLink?: boolean
+    breadCrumb?: boolean
   }
   children?: MenuItemType[]
 }

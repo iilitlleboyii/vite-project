@@ -12,9 +12,9 @@ const baseRoutes: MenuItemType[] = [
   },
   {
     name: 'home',
-    path: '/home',
+    path: '/',
     alias: '/index',
-    component: () => import('@/views/home/index.vue'),
+    component: () => import('@/layout/index.vue'),
     meta: {
       title: '首页',
       icon: 'House',
@@ -24,33 +24,48 @@ const baseRoutes: MenuItemType[] = [
   },
   {
     name: 'bulletinBoard',
-    path: '/',
+    path: '/bulletinBoard',
     component: () => import('@/layout/index.vue'),
     meta: {
       title: '看板中心',
       icon: 'DataBoard',
       authRequired: true,
+      breadCrumb: true,
     },
     children: [
       {
         name: 'machineBoard',
-        path: '/machineBoard',
+        path: '/bulletinBoard/machineBoard',
         component: () => import('@/views/404/index.vue'),
         meta: {
           title: '设备看板',
           icon: 'Link',
           authRequired: true,
+          breadCrumb: true,
         },
       },
       {
         name: 'orderBoard',
-        path: '/orderBoard',
+        path: '/bulletinBoard/orderBoard',
         component: () => import('@/views/404/index.vue'),
         meta: {
           title: '订单看板',
           icon: 'Link',
           authRequired: true,
         },
+        children: [
+          {
+            name: 'test',
+            path: '/bulletinBoard/orderBoard/test',
+            component: () => import('@/views/404/index.vue'),
+            meta: {
+              title: '测试',
+              icon: 'Link',
+              authRequired: true,
+              breadCrumb: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -66,7 +81,7 @@ const baseRoutes: MenuItemType[] = [
     children: [
       {
         name: 'materialInfo',
-        path: '/materialInfo',
+        path: '/warehouseManagement/materialInfo',
         component: () => import('@/views/404/index.vue'),
         meta: {
           title: '物料信息',
@@ -76,7 +91,7 @@ const baseRoutes: MenuItemType[] = [
       },
       {
         name: 'wm',
-        path: '/wm',
+        path: '/warehouseManagement/wm',
         component: () => import('@/views/404/index.vue'),
         meta: {
           title: '仓库管理',

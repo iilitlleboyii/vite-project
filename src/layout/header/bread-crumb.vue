@@ -1,17 +1,37 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item v-for="(route, index) in matchedArr" :key="index">
-      <span>{{ route.meta.title }}</span>
-    </el-breadcrumb-item>
+    <template v-for="route in matchedArr">
+      <el-breadcrumb-item
+        v-if="route.meta.breadCrumb"
+        :to="{ path: route.path }"
+      >
+        {{ route.meta.title }}
+      </el-breadcrumb-item>
+      <el-breadcrumb-item v-else>{{ route.meta.title }}</el-breadcrumb-item>
+    </template>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 const $route = useRoute()
-const matchedArr = computed(() => $route.matched)
+const matchedArr = computed(() => {
+  if ($route.matched[0].path === '/') {
+    return []
+  }
+  return $route.matched
+})
+watch(
+  matchedArr,
+  (newValue) => {
+    console.log(newValue)
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <style scoped lang="scss"></style>
