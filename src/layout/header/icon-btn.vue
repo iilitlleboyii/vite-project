@@ -18,9 +18,7 @@ const props = withDefaults(
     fontSize: '28px',
   },
 )
-
 const emit = defineEmits(['update:switchValue'])
-
 const handleChange = () => {
   emit('update:switchValue', !props.switchValue)
 }

@@ -25,19 +25,4 @@ const matchedArr = computed(() => {
   }
   return $route.matched
 })
-// watch(
-//   matchedArr,
-//   (newValue) => {
-//     console.log(newValue)
-//   },
-//   {
-//     immediate: true,
-//   },
-// )
 </script>
-
-<style scoped lang="scss">
-.breadcrumb-container {
-  margin-left: 10px;
-}
-</style>

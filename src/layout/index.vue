@@ -27,13 +27,16 @@
       <el-container>
         <!-- 导航栏 -->
         <el-header>
-          <icon-btn
-            :title="isCollapse ? '展开' : '折叠'"
-            v-model:switch-value="isCollapse"
-            on-name="Fold"
-            off-name="Expand"
-          />
-          <bread-crumb />
+          <div>
+            <icon-btn
+              :title="isCollapse ? '展开' : '折叠'"
+              v-model:switch-value="isCollapse"
+              on-name="Fold"
+              off-name="Expand"
+            />
+            <el-divider direction="vertical" />
+            <bread-crumb />
+          </div>
           <navigator />
         </el-header>
         <!-- 内容区 -->

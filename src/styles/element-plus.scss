@@ -7,15 +7,45 @@
 }
 
 // 头部设置的
-.el-breadcrumb {
-  font-size: 18px !important;
-}
 .el-header {
   background: white;
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
+  & > div {
+    display: flex;
+    align-items: center;
+  }
 }
+.el-breadcrumb {
+  font-size: 18px !important;
+}
+.el-switch {
+  .el-icon {
+    font-size: 20px !important;
+  }
+}
+.avatar-popper.el-popper {
+  min-width: unset !important;
+  width: 110px !important;
+  .avatar-popper-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .el-link {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+  .el-button {
+    font-size: 16px;
+  }
+  .el-divider {
+    margin: 8px 0;
+  }
+}
+
+// 侧边设置的
 .el-aside {
   height: 100vh;
   background: $menu-bgc !important;
@@ -36,7 +66,6 @@
     color: $menu-tc-active !important;
   }
 }
-
 .el-sub-menu {
   background: $menu-bgc !important;
   .el-sub-menu__title {
