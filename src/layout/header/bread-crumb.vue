@@ -1,21 +1,23 @@
 <template>
-  <el-breadcrumb separator="/">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <template v-for="route in matchedArr">
-      <el-breadcrumb-item
-        v-if="route.meta.breadCrumb"
-        :to="{ path: route.path }"
-      >
-        {{ route.meta.title }}
-      </el-breadcrumb-item>
-      <el-breadcrumb-item v-else>{{ route.meta.title }}</el-breadcrumb-item>
-    </template>
-  </el-breadcrumb>
+  <div class="breadcrumb-container">
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <template v-for="route in matchedArr">
+        <el-breadcrumb-item
+          v-if="route.meta.breadCrumb"
+          :to="{ path: route.path }"
+        >
+          {{ route.meta.title }}
+        </el-breadcrumb-item>
+        <el-breadcrumb-item v-else>{{ route.meta.title }}</el-breadcrumb-item>
+      </template>
+    </el-breadcrumb>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 const $route = useRoute()
 const matchedArr = computed(() => {
   if ($route.matched[0].path === '/') {
@@ -23,15 +25,19 @@ const matchedArr = computed(() => {
   }
   return $route.matched
 })
-watch(
-  matchedArr,
-  (newValue) => {
-    console.log(newValue)
-  },
-  {
-    immediate: true,
-  },
-)
+// watch(
+//   matchedArr,
+//   (newValue) => {
+//     console.log(newValue)
+//   },
+//   {
+//     immediate: true,
+//   },
+// )
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.breadcrumb-container {
+  margin-left: 10px;
+}
+</style>

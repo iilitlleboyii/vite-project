@@ -9,7 +9,6 @@ export interface MenuItemType {
   meta: {
     title: string
     icon?: string
-    authRequired: boolean
     isExternalLink?: boolean
     breadCrumb?: boolean
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="logo_title-container" title="回到首页">
+  <div class="logo_title-container">
     <svg-icon :iconName="iconName" fontSize="28px" color="white" />
     <span v-show="!isCollapse">{{ title }}</span>
   </div>
@@ -20,6 +20,6 @@ defineProps<{
   align-items: center;
   justify-content: space-around;
   color: white;
-  cursor: pointer;
+  cursor: default;
 }
 </style>

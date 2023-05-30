@@ -1,4 +1,6 @@
 export default {
-  title: '后台管理系统',
+  // Logo
   logo: 'home',
+  // 标题
+  title: '后台管理系统',
 }

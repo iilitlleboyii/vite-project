@@ -1,5 +1,6 @@
 <template>
   <menu-link v-if="!item.children" :item="item" />
+  <menu-link v-else-if="item.children.length === 1" :item="item.children[0]" />
   <el-sub-menu v-else :index="item.path">
     <template #title>
       <el-icon><component :is="item.meta.icon"></component></el-icon>
@@ -16,5 +17,3 @@ defineProps<{
   item: MenuItemType
 }>()
 </script>
-
-<style scoped lang="scss"></style>

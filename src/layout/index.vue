@@ -13,6 +13,7 @@
           <el-menu
             :collapse="isCollapse"
             :collapse-transition="false"
+            :default-active="$route.path"
             unique-opened
           >
             <menu-item
@@ -26,17 +27,14 @@
       <el-container>
         <!-- 导航栏 -->
         <el-header>
-          <div
+          <icon-btn
             :title="isCollapse ? '展开' : '折叠'"
-            @click="changeIsCollapse"
-            style="margin-right: 15px; cursor: pointer"
-          >
-            <el-icon style="font-size: 28px">
-              <Expand v-if="isCollapse" />
-              <Fold v-else />
-            </el-icon>
-          </div>
+            v-model:switch-value="isCollapse"
+            on-name="Fold"
+            off-name="Expand"
+          />
           <bread-crumb />
+          <navigator />
         </el-header>
         <!-- 内容区 -->
         <el-main>
@@ -48,20 +46,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import type { MenuItemType } from '@/types'
+import { ref, computed, watch } from 'vue'
 import { useMenuStore } from '@/stores'
+import { useRoute } from 'vue-router'
 import MenuItem from './aside/menu-item.vue'
 import LogoTitle from './aside/logo-title.vue'
 import BreadCrumb from './header/bread-crumb.vue'
-import type { MenuItemType } from '@/types'
+import Navigator from './header/navigator.vue'
 import defaultSettings from '@/settings'
+import IconBtn from './header/icon-btn.vue'
 
 const isCollapse = ref(false)
 const asideWidth = ref('200px')
-const changeIsCollapse = () => {
-  isCollapse.value = !isCollapse.value
-  asideWidth.value = isCollapse.value ? '64px' : '200px'
-}
+
+watch(
+  isCollapse,
+  () => {
+    asideWidth.value = isCollapse.value ? '64px' : '200px'
+  },
+  {
+    immediate: true,
+  },
+)
+
+const $route = useRoute()
 
 const $menuStore = useMenuStore()
 const menuList = $menuStore.menuList
@@ -91,8 +100,7 @@ const menuItems = computed(() => filterHidden(menuList))
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: $light-main-background-color;
-
+  background-color: #eff6fc;
   .menu-scrollbar {
     height: calc(100vh - 120px);
   }

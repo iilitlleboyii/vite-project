@@ -6,15 +6,19 @@
   margin-bottom: 0;
 }
 
-// 侧边栏设置的
+// 头部设置的
+.el-breadcrumb {
+  font-size: 18px !important;
+}
 .el-header {
   background: white;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .el-aside {
   height: 100vh;
-  background: $sidebar-background-color;
+  background: $menu-bgc !important;
 }
 .el-menu {
   border-right: 0 !important;
@@ -23,30 +27,25 @@
   }
 }
 .el-menu-item {
-  color: $sidebar-text-color !important;
-  background: $sidebar-background-color;
+  color: $menu-tc !important;
+  background: $menu-bgc;
   &:hover {
-    background: $sidebar-background-color-hover !important;
+    background: $menu-bgc-hover !important;
   }
   &.is-active {
-    color: $sidebar-text-color-strong !important;
+    color: $menu-tc-active !important;
   }
 }
 
 .el-sub-menu {
-  background: $sidebar-background-color !important;
+  background: $menu-bgc !important;
   .el-sub-menu__title {
-    color: $sidebar-text-color;
+    color: $menu-tc;
     &:hover {
-      background: $sidebar-background-color-hover !important;
+      background: $menu-bgc-hover !important;
     }
   }
   .el-menu-item {
-    background: $sidebar-background-color-strong;
+    background: $menu-bgc-strong;
   }
-}
-
-// 头部设置的
-.el-breadcrumb {
-  font-size: 18px !important;
 }

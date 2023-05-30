@@ -7,101 +7,113 @@ const baseRoutes: MenuItemType[] = [
     hidden: true,
     meta: {
       title: '登录',
-      authRequired: false,
     },
   },
   {
-    name: 'home',
+    name: 'index',
     path: '/',
-    alias: '/index',
+    redirect: '/home',
     component: () => import('@/layout/index.vue'),
     meta: {
       title: '首页',
-      icon: 'House',
-      authRequired: true,
-      isExternalLink: false,
+    },
+    children: [
+      {
+        name: 'home',
+        path: '/home',
+        component: () => import('@/views/404/index.vue'),
+        meta: {
+          title: '首页',
+          icon: 'House',
+          isExternalLink: false,
+        },
+      },
+    ],
+  },
+  {
+    name: 'screen',
+    path: '/screen',
+    component: () => import('@/views/screen/index.vue'),
+    meta: {
+      title: '数据大屏',
+      icon: 'DataBoard',
+      breadCrumb: true,
     },
   },
   {
-    name: 'bulletinBoard',
-    path: '/bulletinBoard',
+    name: 'acl',
+    path: '/acl',
     component: () => import('@/layout/index.vue'),
     meta: {
-      title: '看板中心',
-      icon: 'DataBoard',
-      authRequired: true,
+      title: '权限管理',
+      icon: 'Lock',
       breadCrumb: true,
     },
     children: [
       {
-        name: 'machineBoard',
-        path: '/bulletinBoard/machineBoard',
-        component: () => import('@/views/404/index.vue'),
+        name: 'user',
+        path: '/acl/user',
+        component: () => import('@/views/acl/user/index.vue'),
         meta: {
-          title: '设备看板',
-          icon: 'Link',
-          authRequired: true,
+          title: '用户管理',
+          icon: 'User',
           breadCrumb: true,
         },
       },
       {
-        name: 'orderBoard',
-        path: '/bulletinBoard/orderBoard',
-        component: () => import('@/views/404/index.vue'),
+        name: 'role',
+        path: '/acl/role',
+        component: () => import('@/views/acl/role/index.vue'),
         meta: {
-          title: '订单看板',
-          icon: 'Link',
-          authRequired: true,
+          title: '角色管理',
+          icon: 'Operation',
+          breadCrumb: true,
         },
-        children: [
-          {
-            name: 'test',
-            path: '/bulletinBoard/orderBoard/test',
-            component: () => import('@/views/404/index.vue'),
-            meta: {
-              title: '测试',
-              icon: 'Link',
-              authRequired: true,
-              breadCrumb: true,
-            },
-          },
-        ],
+      },
+      {
+        name: 'menu',
+        path: '/acl/menu',
+        component: () => import('@/views/acl/menu/index.vue'),
+        meta: {
+          title: '菜单管理',
+          icon: 'Menu',
+          breadCrumb: true,
+        },
       },
     ],
   },
   {
-    name: 'warehouseManagement',
-    path: '/warehouseManagement',
+    name: 'warehouse',
+    path: '/warehouse',
     component: () => import('@/layout/index.vue'),
     meta: {
       title: '仓库管理',
-      icon: 'Setting',
-      authRequired: true,
+      icon: 'Grid',
+      breadCrumb: true,
     },
     children: [
       {
-        name: 'materialInfo',
-        path: '/warehouseManagement/materialInfo',
-        component: () => import('@/views/404/index.vue'),
+        name: 'material',
+        path: '/warehouse/material',
+        component: () => import('@/views/warehouse/material/index.vue'),
         meta: {
-          title: '物料信息',
-          icon: 'Link',
-          authRequired: true,
+          title: '物料管理',
+          icon: 'Files',
+          breadCrumb: true,
         },
       },
       {
-        name: 'wm',
-        path: '/warehouseManagement/wm',
-        component: () => import('@/views/404/index.vue'),
+        name: 'inventory',
+        path: '/warehouse/inventory',
+        component: () => import('@/views/warehouse/inventory/index.vue'),
         meta: {
-          title: '仓库管理',
-          icon: 'Link',
-          authRequired: true,
+          title: '库存管理',
+          icon: 'Present',
+          breadCrumb: true,
         },
       },
     ],
   },
-
   {
     name: '404',
     path: '/404',
@@ -109,7 +121,6 @@ const baseRoutes: MenuItemType[] = [
     hidden: true,
     meta: {
       title: '404',
-      authRequired: false,
     },
   },
   {
@@ -119,7 +130,6 @@ const baseRoutes: MenuItemType[] = [
     hidden: true,
     meta: {
       title: 'any',
-      authRequired: false,
     },
   },
 ]
