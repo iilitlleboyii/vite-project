@@ -69,11 +69,11 @@ import { reactive, ref, watch } from 'vue'
 // @ts-ignore
 import type { FormRules, FormInstance } from 'element-plus'
 // @ts-expect-error 等待作者更新或者自己写个d.ts声明
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElNotification } from 'element-plus'
 import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
 
-let rememberMe = ref<boolean>()
+const rememberMe = ref<boolean>()
 let rememberMeStorage = localStorage.getItem('rememberMe')
 rememberMe.value = rememberMeStorage ? JSON.parse(rememberMeStorage) : false
 
@@ -87,12 +87,16 @@ const formRules = reactive<FormRules>({
   username: [{ required: true, message: '账号必填哦', trigger: 'blur' }],
   password: [{ required: true, message: '密码必填哦', trigger: 'blur' }],
 })
-let formParams = reactive({
+const formParams = reactive({
   username: '',
   password: '',
 })
 let formParamsStorage = localStorage.getItem('formParams')
-formParams = formParamsStorage ? JSON.parse(formParamsStorage) : formParams
+if (formParamsStorage) {
+  let formParamsStorageObj = JSON.parse(formParamsStorage)
+  formParams.username = formParamsStorageObj.username
+  formParams.password = formParamsStorageObj.password
+}
 
 watch(
   rememberMe,
@@ -105,8 +109,12 @@ watch(
 const login = async () => {
   try {
     await $userStore.userLogin(formParams)
-    ElMessage.success('登录成功')
     $router.replace('/')
+    ElNotification({
+      title: '登录成功',
+      message: '欢迎回来，我的老哥！',
+      type: 'success',
+    })
   } catch (error: any) {
     ElMessage.error(error)
   }
