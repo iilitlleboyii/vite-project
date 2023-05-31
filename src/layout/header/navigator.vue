@@ -6,7 +6,7 @@
       </template>
     </el-input>
     <el-divider direction="vertical" />
-    <icon-btn
+    <icon-switch
       :title="isFullscreen ? '退出全屏' : '全屏'"
       v-model:switch-value="isFullscreen"
       on-icon="Crop"
@@ -28,11 +28,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import IconBtn from './icon-btn.vue'
-import Avatar from './avatar.vue'
 import { useFullscreen } from '@vueuse/core'
-const { isFullscreen, toggle } = useFullscreen()
+import IconSwitch from './icon-switch.vue'
+import Avatar from './avatar.vue'
 
+const { isFullscreen, toggle } = useFullscreen()
 const inputValue = ref('')
 const isDark = ref(false)
 </script>

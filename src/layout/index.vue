@@ -28,7 +28,7 @@
         <!-- 导航栏 -->
         <el-header>
           <div>
-            <icon-btn
+            <icon-switch
               :title="isCollapse ? '展开' : '折叠'"
               v-model:switch-value="isCollapse"
               on-icon="Fold"
@@ -58,7 +58,7 @@ import LogoTitle from './aside/logo-title.vue'
 import BreadCrumb from './header/bread-crumb.vue'
 import Navigator from './header/navigator.vue'
 import defaultSettings from '@/settings'
-import IconBtn from './header/icon-btn.vue'
+import IconSwitch from './header/icon-switch.vue'
 
 const isCollapse = ref(false)
 const asideWidth = ref('200px')

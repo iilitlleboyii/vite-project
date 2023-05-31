@@ -1,5 +1,5 @@
 <template>
-  <div class="icon-btn" @click="handleChange">
+  <div class="icon-switch" @click="handleChange">
     <el-icon :style="{ fontSize }">
       <component :is="switchValue ? onIcon : offIcon" />
     </el-icon>
@@ -30,7 +30,7 @@ const handleChange = () => {
 </script>
 
 <style scoped lang="scss">
-.icon-btn {
+.icon-switch {
   display: flex;
   align-items: center;
   justify-content: center;
