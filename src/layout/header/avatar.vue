@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-popover placement="bottom" trigger="click" popper-class="avatar-popper">
+    <el-popover placement="bottom" trigger="hover" popper-class="avatar-popper">
       <template #reference>
         <el-avatar />
       </template>

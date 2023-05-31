@@ -13,6 +13,7 @@ const props = withDefaults(
     onName: string
     offName: string
     fontSize?: string
+    handleChange?: () => void
   }>(),
   {
     fontSize: '28px',
@@ -20,7 +21,11 @@ const props = withDefaults(
 )
 const emit = defineEmits(['update:switchValue'])
 const handleChange = () => {
-  emit('update:switchValue', !props.switchValue)
+  if (props.handleChange) {
+    props.handleChange()
+  } else {
+    emit('update:switchValue', !props.switchValue)
+  }
 }
 </script>
 
