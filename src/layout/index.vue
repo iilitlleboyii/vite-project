@@ -11,6 +11,7 @@
         <el-scrollbar class="menu-scrollbar">
           <!-- 菜单栏 -->
           <el-menu
+            id="my-menu"
             :collapse="isCollapse"
             :collapse-transition="false"
             :default-active="$route.path"

@@ -9,7 +9,7 @@
     <icon-switch
       :title="isFullscreen ? '退出全屏' : '全屏'"
       v-model:switch-value="isFullscreen"
-      on-icon="Crop"
+      on-icon="CloseBold"
       off-icon="FullScreen"
       :handle-change="toggle"
     />

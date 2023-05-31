@@ -25,25 +25,6 @@
     font-size: 20px !important;
   }
 }
-.avatar-popper.el-popper {
-  min-width: unset !important;
-  width: 110px !important;
-  .avatar-popper-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-  .el-link {
-    font-size: 16px;
-    margin-bottom: 7px;
-  }
-  .el-button {
-    font-size: 16px;
-  }
-  .el-divider {
-    margin: 8px 0;
-  }
-}
 
 // 侧边设置的
 .el-aside {
