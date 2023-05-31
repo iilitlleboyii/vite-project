@@ -7,10 +7,10 @@
     </el-input>
     <el-divider direction="vertical" />
     <icon-btn
-      :title="isFullscreen ? '还原' : '全屏'"
+      :title="isFullscreen ? '退出全屏' : '全屏'"
       v-model:switch-value="isFullscreen"
-      on-name="Crop"
-      off-name="FullScreen"
+      on-icon="Crop"
+      off-icon="FullScreen"
       :handle-change="toggle"
     />
     <el-divider direction="vertical" />

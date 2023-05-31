@@ -1,7 +1,7 @@
 <template>
   <div class="icon-btn" @click="handleChange">
     <el-icon :style="{ fontSize }">
-      <component :is="switchValue ? onName : offName" />
+      <component :is="switchValue ? onIcon : offIcon" />
     </el-icon>
   </div>
 </template>
@@ -10,8 +10,8 @@
 const props = withDefaults(
   defineProps<{
     switchValue: boolean
-    onName: string
-    offName: string
+    onIcon: string
+    offIcon: string
     fontSize?: string
     handleChange?: () => void
   }>(),

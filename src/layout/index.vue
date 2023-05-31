@@ -31,8 +31,8 @@
             <icon-btn
               :title="isCollapse ? '展开' : '折叠'"
               v-model:switch-value="isCollapse"
-              on-name="Fold"
-              off-name="Expand"
+              on-icon="Fold"
+              off-icon="Expand"
             />
             <el-divider direction="vertical" />
             <bread-crumb />
