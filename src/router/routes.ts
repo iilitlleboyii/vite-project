@@ -37,7 +37,6 @@ const baseRoutes: MenuItemType[] = [
     meta: {
       title: '数据大屏',
       icon: 'DataBoard',
-      breadCrumb: true,
     },
   },
   {
@@ -47,7 +46,6 @@ const baseRoutes: MenuItemType[] = [
     meta: {
       title: '权限管理',
       icon: 'Lock',
-      breadCrumb: true,
     },
     children: [
       {
@@ -57,7 +55,6 @@ const baseRoutes: MenuItemType[] = [
         meta: {
           title: '用户管理',
           icon: 'User',
-          breadCrumb: true,
         },
       },
       {
@@ -67,7 +64,6 @@ const baseRoutes: MenuItemType[] = [
         meta: {
           title: '角色管理',
           icon: 'Operation',
-          breadCrumb: true,
         },
       },
       {
@@ -77,7 +73,6 @@ const baseRoutes: MenuItemType[] = [
         meta: {
           title: '菜单管理',
           icon: 'Menu',
-          breadCrumb: true,
         },
       },
     ],
@@ -89,7 +84,6 @@ const baseRoutes: MenuItemType[] = [
     meta: {
       title: '仓库管理',
       icon: 'Grid',
-      breadCrumb: true,
     },
     children: [
       {
@@ -99,7 +93,6 @@ const baseRoutes: MenuItemType[] = [
         meta: {
           title: '物料管理',
           icon: 'Files',
-          breadCrumb: true,
         },
       },
       {
@@ -109,7 +102,6 @@ const baseRoutes: MenuItemType[] = [
         meta: {
           title: '库存管理',
           icon: 'Present',
-          breadCrumb: true,
         },
       },
     ],
