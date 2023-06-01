@@ -4,9 +4,6 @@ import App from './App.vue'
 // 引入全局样式和变量
 import './styles/index.scss'
 
-// 引入加载进度条
-import 'nprogress/nprogress.css'
-
 // 引入element-plus插件及样式
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -18,6 +15,9 @@ import 'virtual:svg-icons-register'
 
 // 引入自定义插件对象，注册整个项目全局组件
 import globalComponent from './components'
+
+// 引入路由守卫
+import './permission'
 
 import pinia from './stores'
 import router from './router'

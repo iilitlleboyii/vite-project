@@ -71,7 +71,7 @@ import type { FormRules, FormInstance } from 'element-plus'
 // @ts-expect-error 等待作者更新或者自己写个d.ts声明
 import { ElMessage, ElNotification } from 'element-plus'
 import { useUserStore } from '@/stores'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const rememberMe = ref<boolean>()
 let rememberMeStorage = localStorage.getItem('rememberMe')
@@ -81,6 +81,7 @@ const isLoading = ref(false)
 
 const $userStore = useUserStore()
 const $router = useRouter()
+const $route = useRoute()
 
 const formRef = ref<FormInstance>()
 const formRules = reactive<FormRules>({
@@ -109,7 +110,8 @@ watch(
 const login = async () => {
   try {
     await $userStore.userLogin(formParams)
-    $router.replace('/')
+    const redirect = ($route.query.redirect as string) || '/'
+    $router.replace(redirect)
     ElNotification({
       title: '登录成功',
       message: '欢迎回来，我的老哥！',
