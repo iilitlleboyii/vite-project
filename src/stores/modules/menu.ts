@@ -14,10 +14,6 @@ export const useMenuStore = defineStore('menuStore', {
     }
   },
   actions: {},
-  getters: {
-    cachedComponents: (state) => {
-      return state.loadedRoutes.map((item) => item.name)
-    },
-  },
+  getters: {},
   persist: false,
 })

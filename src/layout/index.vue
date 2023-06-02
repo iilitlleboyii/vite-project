@@ -72,19 +72,17 @@ import Tabs from './main/tabs.vue'
 const isCollapse = ref(false)
 const asideWidth = ref('200px')
 
-watch(
-  isCollapse,
-  () => {
-    asideWidth.value = isCollapse.value ? '64px' : '200px'
-  },
-  {
-    immediate: true,
-  },
-)
+watch(isCollapse, () => {
+  asideWidth.value = isCollapse.value ? '64px' : '200px'
+})
 
 const $route = useRoute()
-
 const $menuStore = useMenuStore()
+
+const cachedComponents = computed(() =>
+  $menuStore.loadedRoutes.map((item) => item.name),
+)
+
 const menuList = $menuStore.menuList
 const filterHidden = (arr: MenuItemType[]) => {
   const stack = [...arr]
@@ -105,8 +103,6 @@ const filterHidden = (arr: MenuItemType[]) => {
   return arr.filter((item: MenuItemType) => !item.hidden)
 }
 const menuItems = computed(() => filterHidden(menuList))
-
-const cachedComponents = $menuStore.cachedComponents
 </script>
 
 <style scoped lang="scss">
