@@ -42,7 +42,14 @@
         </el-header>
         <!-- 内容区 -->
         <el-main>
-          <router-view />
+          <tabs />
+          <router-view v-slot="{ Component }">
+            <keep-alive :include="cachedComponents">
+              <Transition name="fade" mode="out-in">
+                <component :is="Component" :key="$route.path" />
+              </Transition>
+            </keep-alive>
+          </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -60,6 +67,7 @@ import BreadCrumb from './header/bread-crumb.vue'
 import Navigator from './header/navigator.vue'
 import defaultSettings from '@/settings'
 import IconSwitch from './header/icon-switch.vue'
+import Tabs from './main/tabs.vue'
 
 const isCollapse = ref(false)
 const asideWidth = ref('200px')
@@ -97,6 +105,8 @@ const filterHidden = (arr: MenuItemType[]) => {
   return arr.filter((item: MenuItemType) => !item.hidden)
 }
 const menuItems = computed(() => filterHidden(menuList))
+
+const cachedComponents = $menuStore.cachedComponents
 </script>
 
 <style scoped lang="scss">

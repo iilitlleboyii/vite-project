@@ -8,7 +8,7 @@
 
 // 头部设置的
 .el-header {
-  background: white;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +29,7 @@
 // 侧边设置的
 .el-aside {
   height: 100vh;
-  background: $menu-bgc !important;
+  background-color: $menu-bgc !important;
 }
 .el-menu {
   border-right: 0 !important;
@@ -41,21 +41,54 @@
   color: $menu-tc !important;
   background: $menu-bgc;
   &:hover {
-    background: $menu-bgc-hover !important;
+    background-color: $menu-bgc-hover !important;
   }
   &.is-active {
     color: $menu-tc-active !important;
   }
 }
 .el-sub-menu {
-  background: $menu-bgc !important;
+  background-color: $menu-bgc !important;
   .el-sub-menu__title {
     color: $menu-tc;
     &:hover {
-      background: $menu-bgc-hover !important;
+      background-color: $menu-bgc-hover !important;
     }
   }
   .el-menu-item {
-    background: $menu-bgc-strong;
+    background-color: $menu-bgc-strong;
+  }
+}
+
+// 内容设置的
+.el-main {
+  padding: 0 !important;
+}
+
+.el-tabs__header {
+  height: 44px !important;
+  padding: 6px 20px !important;
+  .el-tabs__nav {
+    border-radius: 0;
+    border: none !important;
+  }
+  .el-tabs__item {
+    height: 32px;
+    padding: 0 6px !important;
+    border: 1px solid var(--el-border-color-light) !important;
+    transition: none !important;
+    margin-left: 0 !important;
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+    &.is-active {
+      color: white;
+      background-color: #409eff;
+      border-color: #409eff;
+    }
+    .is-icon-close {
+      width: 14px !important;
+      transition: none;
+    }
   }
 }

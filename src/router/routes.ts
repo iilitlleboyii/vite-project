@@ -37,15 +37,18 @@ const baseRoutes: MenuItemType[] = [
     meta: {
       title: '数据大屏',
       icon: 'DataBoard',
+      isExternalLink: true,
     },
   },
   {
     name: 'acl',
     path: '/acl',
+    redirect: '/acl/user',
     component: () => import('@/layout/index.vue'),
     meta: {
       title: '权限管理',
       icon: 'Lock',
+      breadCrumb: true,
     },
     children: [
       {
@@ -80,10 +83,12 @@ const baseRoutes: MenuItemType[] = [
   {
     name: 'warehouse',
     path: '/warehouse',
+    redirect: '/warehouse/material',
     component: () => import('@/layout/index.vue'),
     meta: {
       title: '仓库管理',
       icon: 'Grid',
+      breadCrumb: true,
     },
     children: [
       {
