@@ -39,7 +39,7 @@
                 @click="submitForm(formRef)"
                 :loading="isLoading"
               >
-                登&nbsp;&nbsp;录
+                {{ isLoading ? '登 录 中 ...' : '登  录' }}
               </el-button>
             </el-form-item>
             <el-form-item>
@@ -142,7 +142,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       setTimeout(() => {
         login()
         isLoading.value = false
-      }, 500)
+      }, 600)
     }
   })
 }

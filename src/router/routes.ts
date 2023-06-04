@@ -3,7 +3,7 @@ const baseRoutes: MenuItemType[] = [
   {
     name: 'login',
     path: '/login',
-    component: () => import('@/views/login/index.vue'),
+    component: () => import('@/views/login/login.vue'),
     hidden: true,
     meta: {
       title: '登录',
@@ -21,7 +21,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'home',
         path: '/home',
-        component: () => import('@/views/404/index.vue'),
+        component: () => import('@/views/home/home.vue'),
         meta: {
           title: '首页',
           icon: 'House',
@@ -33,7 +33,7 @@ const baseRoutes: MenuItemType[] = [
   {
     name: 'screen',
     path: '/screen',
-    component: () => import('@/views/screen/index.vue'),
+    component: () => import('@/views/screen/screen.vue'),
     meta: {
       title: '数据大屏',
       icon: 'DataBoard',
@@ -54,7 +54,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'user',
         path: '/acl/user',
-        component: () => import('@/views/acl/user/index.vue'),
+        component: () => import('@/views/acl/user/user.vue'),
         meta: {
           title: '用户管理',
           icon: 'User',
@@ -63,7 +63,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'role',
         path: '/acl/role',
-        component: () => import('@/views/acl/role/index.vue'),
+        component: () => import('@/views/acl/role/role.vue'),
         meta: {
           title: '角色管理',
           icon: 'Operation',
@@ -72,7 +72,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'menu',
         path: '/acl/menu',
-        component: () => import('@/views/acl/menu/index.vue'),
+        component: () => import('@/views/acl/menu/menu.vue'),
         meta: {
           title: '菜单管理',
           icon: 'Menu',
@@ -94,7 +94,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'material',
         path: '/warehouse/material',
-        component: () => import('@/views/warehouse/material/index.vue'),
+        component: () => import('@/views/warehouse/material/material.vue'),
         meta: {
           title: '物料管理',
           icon: 'Files',
@@ -103,7 +103,7 @@ const baseRoutes: MenuItemType[] = [
       {
         name: 'inventory',
         path: '/warehouse/inventory',
-        component: () => import('@/views/warehouse/inventory/index.vue'),
+        component: () => import('@/views/warehouse/inventory/inventory.vue'),
         meta: {
           title: '库存管理',
           icon: 'Present',
@@ -114,7 +114,7 @@ const baseRoutes: MenuItemType[] = [
   {
     name: '404',
     path: '/404',
-    component: () => import('@/views/404/index.vue'),
+    component: () => import('@/views/404/404.vue'),
     hidden: true,
     meta: {
       title: '404',

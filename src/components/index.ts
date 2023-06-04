@@ -1,9 +1,14 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import SvgIcon from './SvgIcon/index.vue'
 import Echarts from './Echarts/index.vue'
+import SearchBar from './SearchBar/index.vue'
 import type { App, Component } from 'vue'
 
-const customComponents: { [name: string]: Component } = { SvgIcon, Echarts }
+const customComponents: { [name: string]: Component } = {
+  SvgIcon,
+  Echarts,
+  SearchBar,
+}
 
 export default {
   install(app: App) {

@@ -43,13 +43,15 @@
         <!-- 内容区 -->
         <el-main>
           <tabs />
-          <router-view v-slot="{ Component }">
-            <keep-alive :include="cachedComponents">
+          <div class="main-container">
+            <router-view v-slot="{ Component }">
               <Transition name="fade" mode="out-in">
-                <component :is="Component" :key="$route.path" />
+                <keep-alive :include="cachedComponents">
+                  <component :is="Component" :key="$route.path" />
+                </keep-alive>
               </Transition>
-            </keep-alive>
-          </router-view>
+            </router-view>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -83,6 +85,10 @@ const cachedComponents = computed(() =>
   $menuStore.loadedRoutes.map((item) => item.name),
 )
 
+watch(cachedComponents, (val) => {
+  console.log(val)
+})
+
 const menuList = $menuStore.menuList
 const filterHidden = (arr: MenuItemType[]) => {
   const stack = [...arr]
@@ -113,6 +119,14 @@ const menuItems = computed(() => filterHidden(menuList))
   background-color: #eff6fc;
   .menu-scrollbar {
     height: calc(100vh - 120px);
+  }
+  .main-container {
+    margin: 10px;
+    height: calc(100vh - 125px);
+    overflow: hidden;
+    &:hover {
+      overflow-y: overlay;
+    }
   }
 }
 </style>

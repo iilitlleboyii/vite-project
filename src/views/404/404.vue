@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-content">
     <h1>404路由</h1>
     <h1>SVG全局挂载使用</h1>
     <SvgIcon iconName="phone" color="green"></SvgIcon>
@@ -29,4 +29,9 @@ const options = reactive({
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.main-content {
+  width: 100%;
+  height: 120%;
+}
+</style>
