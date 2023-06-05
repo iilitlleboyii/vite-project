@@ -105,6 +105,12 @@ const filterHidden = (arr: MenuItemType[]) => {
   return arr.filter((item: MenuItemType) => !item.hidden)
 }
 const menuItems = computed(() => filterHidden(menuList))
+
+// onMounted(() => {
+//   window.onresize = () => {
+//     isCollapse.value = window.innerWidth < 768
+//   }
+// })
 </script>
 
 <style scoped lang="scss">

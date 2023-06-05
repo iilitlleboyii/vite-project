@@ -30,4 +30,6 @@ app.use(ElementPlus, {
 })
 app.use(globalComponent)
 
-app.mount('#app')
+setTimeout(() => {
+  app.mount('#app')
+}, 1000 * 1.5)

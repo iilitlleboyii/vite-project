@@ -1,25 +1,36 @@
 <template>
-  <div class="search-bar" :style="{ height: searchBarHeight }">
+  <div class="search-bar">
     <el-form>
       <el-row :gutter="20">
         <template
-          v-for="input in isCollapse
-            ? inputArr.slice(0, visibleInputCount)
-            : inputArr"
+          v-for="item in isCollapse
+            ? config.slice(0, visibleInputCount)
+            : config"
         >
           <el-col :lg="6" :md="8" :sm="12" :xs="24">
-            <el-form-item :label="input.label">
-              <el-input
-                v-model="formInline.user"
-                :placeholder="input.placeholder"
-              />
+            <el-form-item :label="item.label">
+              <component
+                :is="item.name"
+                v-bind="item.bindProps ? item.bindProps : {}"
+                v-model="item.value"
+                v-on="item.events ? item.events : {}"
+              >
+                <template v-if="item.slot && item.slot.name === 'el-option'">
+                  <el-option
+                    v-for="option in item.slot.value"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  />
+                </template>
+              </component>
             </el-form-item>
           </el-col>
         </template>
         <el-col
-          :lg="isCollapse ? 6 : 24 - (inputArr.length % 4) * 6"
-          :md="isCollapse ? 8 : 24 - (inputArr.length % 3) * 8"
-          :sm="isCollapse ? 12 : 24 - (inputArr.length % 2) * 12"
+          :lg="isCollapse ? 6 : 24 - (config.length % 4) * 6"
+          :md="isCollapse ? 8 : 24 - (config.length % 3) * 8"
+          :sm="isCollapse ? 12 : 24 - (config.length % 2) * 12"
           :xs="24"
         >
           <el-form-item class="search-bar__btns">
@@ -48,50 +59,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { debounce } from '@/utils/plugins'
 
-const formInline = reactive({
-  user: '',
-  region: '',
-})
+const prop = withDefaults(
+  defineProps<{
+    config: {
+      name: string
+      label: string
+      value: any
+      bindProps?: any
+      slot?: {
+        name: string
+        value: any
+      }
+      events?: any
+    }[]
+  }>(),
+  {
+    config: () => [],
+  },
+)
 
 const isCollapse = ref(true)
-const searchBarHeight = computed(() => {
-  return isCollapse.value ? '52px' : 'auto'
-})
-
-const inputArr = ref([
-  {
-    label: '工单编号',
-    placeholder: '请输入工单编号',
-    model: 'user',
-  },
-  {
-    label: '产品名称',
-    placeholder: '请输入产品名称',
-    model: 'user',
-  },
-  {
-    label: '设备名称',
-    placeholder: '请输入设备名称',
-    model: 'user',
-  },
-  {
-    label: '模具名称',
-    placeholder: '请输入模具名称',
-    model: 'user',
-  },
-  {
-    label: '工单状态',
-    placeholder: '请输入工单状态',
-    model: 'user',
-  },
-  {
-    label: '工单创建时间',
-    placeholder: '请输入工单创建时间',
-    model: 'user',
-  },
-])
 
 const screenWidth = ref(window.innerWidth)
 const visibleInputCount = computed(() => {
@@ -101,11 +91,19 @@ const visibleInputCount = computed(() => {
     return 2
   } else if (screenWidth.value >= 768) {
     return 1
+  } else {
+    return 1
   }
 })
+
+const handleResize = debounce(() => {
+  screenWidth.value = window.innerWidth
+}, 300)
+
 onMounted(() => {
+  console.log(prop.config)
   window.onresize = () => {
-    screenWidth.value = window.innerWidth
+    handleResize()
   }
 })
 </script>
@@ -114,15 +112,21 @@ onMounted(() => {
 .search-bar {
   padding-top: 10px;
   background-color: white;
-  .el-row {
-    margin: 0 !important;
-    .el-form-item {
-      margin-bottom: 10px !important;
-    }
-  }
   .search-bar__btns {
     :deep(.el-form-item__content) {
       justify-content: flex-end;
+    }
+    .el-button + .el-button {
+      margin-left: 20px;
+    }
+  }
+}
+.el-row {
+  margin: 0 !important;
+  .el-form-item {
+    margin-bottom: 10px !important;
+    :deep(.el-form-item__content) div {
+      width: 100%;
     }
   }
 }
