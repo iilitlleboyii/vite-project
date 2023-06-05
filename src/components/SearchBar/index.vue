@@ -1,35 +1,34 @@
 <template>
   <div class="search-bar" :style="{ height: searchBarHeight }">
-    <!-- <el-form>
-      <el-row justify="space-between">
-        <el-col :span="4">
-          <el-form-item label="字段1">
-            <el-input v-model="formInline.user" placeholder="请输入字段1" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-form-item label="字段2">
-            <el-input v-model="formInline.user" placeholder="请输入字段2" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-form-item label="字段3">
-            <el-input v-model="formInline.user" placeholder="请输入字段3" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="4">
-          <el-form-item label="字段4">
-            <el-input v-model="formInline.user" placeholder="请输入字段4" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item>
+    <el-form>
+      <el-row :gutter="20">
+        <template
+          v-for="input in isCollapse
+            ? inputArr.slice(0, visibleInputCount)
+            : inputArr"
+        >
+          <el-col :lg="6" :md="8" :sm="12" :xs="24">
+            <el-form-item :label="input.label">
+              <el-input
+                v-model="formInline.user"
+                :placeholder="input.placeholder"
+              />
+            </el-form-item>
+          </el-col>
+        </template>
+        <el-col
+          :lg="isCollapse ? 6 : 24 - (inputArr.length % 4) * 6"
+          :md="isCollapse ? 8 : 24 - (inputArr.length % 3) * 8"
+          :sm="isCollapse ? 12 : 24 - (inputArr.length % 2) * 12"
+          :xs="24"
+        >
+          <el-form-item class="search-bar__btns">
             <el-button type="primary" icon="Search">搜索</el-button>
             <el-button icon="Refresh">重置</el-button>
             <el-button
               type="primary"
-              link
               size="small"
+              link
               @click="isCollapse = !isCollapse"
             >
               <template #default>
@@ -44,26 +43,12 @@
           </el-form-item>
         </el-col>
       </el-row>
-    </el-form> -->
-    <el-form :inline="true" :model="formInline">
-      <el-form-item label="Approved by">
-        <el-input v-model="formInline.user" placeholder="Approved by" />
-      </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="formInline.region" placeholder="Activity zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-form-item style="position: absolute; right: 0; margin-right: 0">
-        <el-button type="primary">Query</el-button>
-      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, onMounted } from 'vue'
 
 const formInline = reactive({
   user: '',
@@ -74,23 +59,71 @@ const isCollapse = ref(true)
 const searchBarHeight = computed(() => {
   return isCollapse.value ? '52px' : 'auto'
 })
+
+const inputArr = ref([
+  {
+    label: '工单编号',
+    placeholder: '请输入工单编号',
+    model: 'user',
+  },
+  {
+    label: '产品名称',
+    placeholder: '请输入产品名称',
+    model: 'user',
+  },
+  {
+    label: '设备名称',
+    placeholder: '请输入设备名称',
+    model: 'user',
+  },
+  {
+    label: '模具名称',
+    placeholder: '请输入模具名称',
+    model: 'user',
+  },
+  {
+    label: '工单状态',
+    placeholder: '请输入工单状态',
+    model: 'user',
+  },
+  {
+    label: '工单创建时间',
+    placeholder: '请输入工单创建时间',
+    model: 'user',
+  },
+])
+
+const screenWidth = ref(window.innerWidth)
+const visibleInputCount = computed(() => {
+  if (screenWidth.value >= 1200) {
+    return 3
+  } else if (screenWidth.value >= 992) {
+    return 2
+  } else if (screenWidth.value >= 768) {
+    return 1
+  }
+})
+onMounted(() => {
+  window.onresize = () => {
+    screenWidth.value = window.innerWidth
+  }
+})
 </script>
 
 <style scoped lang="scss">
 .search-bar {
-  padding: 10px;
+  padding-top: 10px;
   background-color: white;
-  .el-form {
-    position: relative;
+  .el-row {
+    margin: 0 !important;
+    .el-form-item {
+      margin-bottom: 10px !important;
+    }
   }
-  // overflow: hidden;
-  // .el-form {
-  //   .el-form-item {
-  //     margin: 0;
-  //   }
-  // }
-  // .el-button + .el-button {
-  //   margin-left: 7px;
-  // }
+  .search-bar__btns {
+    :deep(.el-form-item__content) {
+      justify-content: flex-end;
+    }
+  }
 }
 </style>

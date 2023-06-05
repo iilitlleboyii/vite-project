@@ -45,11 +45,11 @@
           <tabs />
           <div class="main-container">
             <router-view v-slot="{ Component }">
-              <Transition name="fade" mode="out-in">
+              <transition name="fade" mode="out-in">
                 <keep-alive :include="cachedComponents">
                   <component :is="Component" :key="$route.path" />
                 </keep-alive>
-              </Transition>
+              </transition>
             </router-view>
           </div>
         </el-main>
@@ -84,10 +84,6 @@ const $menuStore = useMenuStore()
 const cachedComponents = computed(() =>
   $menuStore.loadedRoutes.map((item) => item.name),
 )
-
-watch(cachedComponents, (val) => {
-  console.log(val)
-})
 
 const menuList = $menuStore.menuList
 const filterHidden = (arr: MenuItemType[]) => {
