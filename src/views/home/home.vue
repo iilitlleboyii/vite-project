@@ -1,18 +1,26 @@
 <template>
   <div>
-    <search-bar :config="config" />
+    <search-bar
+      v-model:formRef="formRef"
+      :config="config"
+      :handleSearch="handleSearch"
+      :resetForm="resetForm"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 
-const formValue = reactive({
-  workOrderNo: '1',
-  productName: '2',
-  deviceNo: '3',
-  companyId: '',
-})
+const formInitialData = () => {
+  return {
+    workOrderNo: '',
+    productName: '',
+    deviceNo: '',
+    companyId: '',
+  }
+}
+const formRef = ref(formInitialData())
 
 const options = [
   {
@@ -36,36 +44,35 @@ const options = [
     label: 'Option5',
   },
 ]
-
 const config = ref([
   {
     name: 'el-input',
     label: '工单编号',
+    key: 'workOrderNo',
     bindProps: {
       placeholder: '请输入工单编号',
     },
-    value: formValue.workOrderNo,
   },
   {
     name: 'el-input',
     label: '产品名称',
+    key: 'productName',
     bindProps: {
       placeholder: '请输入产品名称',
     },
-    value: formValue.productName,
   },
   {
     name: 'el-input',
     label: '设备编号',
+    key: 'deviceNo',
     bindProps: {
       placeholder: '请输入设备编号',
     },
-    value: formValue.deviceNo,
   },
   {
     name: 'el-select',
     label: '公司名称',
-    value: formValue.companyId,
+    key: 'companyId',
     slot: {
       name: 'el-option',
       value: options,
@@ -77,6 +84,15 @@ const config = ref([
     },
   },
 ])
+
+const handleSearch = () => {
+  // 添加搜索的业务代码
+  console.log(formRef.value)
+}
+const resetForm = () => {
+  formRef.value = formInitialData()
+  handleSearch()
+}
 </script>
 
 <style scoped lang="scss"></style>

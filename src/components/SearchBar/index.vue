@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <el-form>
+    <el-form :model="formRef">
       <el-row :gutter="20">
         <template
           v-for="item in isCollapse
@@ -12,7 +12,7 @@
               <component
                 :is="item.name"
                 v-bind="item.bindProps ? item.bindProps : {}"
-                v-model="item.value"
+                v-model="formRef[item.key]"
                 v-on="item.events ? item.events : {}"
               >
                 <template v-if="item.slot && item.slot.name === 'el-option'">
@@ -34,8 +34,10 @@
           :xs="24"
         >
           <el-form-item class="search-bar__btns">
-            <el-button type="primary" icon="Search">搜索</el-button>
-            <el-button icon="Refresh">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleSearch">
+              搜索
+            </el-button>
+            <el-button icon="Refresh" @click="resetForm">重置</el-button>
             <el-button
               type="primary"
               size="small"
@@ -59,30 +61,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { debounce } from '@/utils/plugins'
 
-const prop = withDefaults(
-  defineProps<{
-    config: {
+const props = defineProps<{
+  formRef: any // 表单数据
+  config: {
+    name: string // 组件名
+    label: string // 标签名
+    key: string // 绑定的字段名
+    bindProps?: any // 绑定的属性
+    slot?: {
+      // 插槽
       name: string
-      label: string
       value: any
-      bindProps?: any
-      slot?: {
-        name: string
-        value: any
-      }
-      events?: any
-    }[]
-  }>(),
-  {
-    config: () => [],
+    }
+    events?: any // 绑定的事件
+  }[]
+  handleSearch: () => void // 搜索事件
+  resetForm: () => void // 重置事件
+}>()
+const emit = defineEmits(['update:formRef'])
+watch(
+  () => props.formRef,
+  (newValue) => {
+    emit('update:formRef', newValue)
   },
 )
 
 const isCollapse = ref(true)
-
 const screenWidth = ref(window.innerWidth)
 const visibleInputCount = computed(() => {
   if (screenWidth.value >= 1200) {
@@ -95,13 +102,11 @@ const visibleInputCount = computed(() => {
     return 1
   }
 })
-
 const handleResize = debounce(() => {
   screenWidth.value = window.innerWidth
 }, 300)
 
 onMounted(() => {
-  console.log(prop.config)
   window.onresize = () => {
     handleResize()
   }
