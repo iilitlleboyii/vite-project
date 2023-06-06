@@ -122,7 +122,7 @@ onMounted(() => {
       justify-content: flex-end;
     }
     .el-button + .el-button {
-      margin-left: 20px;
+      margin-left: 10px;
     }
   }
 }
