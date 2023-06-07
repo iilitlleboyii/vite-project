@@ -92,7 +92,7 @@ const createConnection = () => {
      * for more details about "mqtt.connect" method & options,
      * please refer to https://github.com/mqttjs/MQTT.js#mqttconnecturl-options
      */
-    client.value = mqtt.connect(connectUrl, options);
+    client.value = mqtt.connect(connectUrl, options)
     // client.value = mqtt.connect('ws://test.mosquitto.org:8080/mqtt')
 
     if (client.value.on) {
