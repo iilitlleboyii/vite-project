@@ -1,16 +1,56 @@
 <template>
   <div>
+    <p>{{ t('hello') }}</p>
     <search-bar
       v-model:formRef="formRef"
       :config="config"
       :handleSearch="handleSearch"
       :resetForm="resetForm"
     />
+    <!-- <component
+      :is="config[4].name"
+      v-bind="config[4].bindProps ? config[4].bindProps : {}"
+      v-model="formRef[config[4].key as keyof typeof formRef]"
+      v-on="config[4].events ? config[4].events : {}"
+    ></component> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+// @ts-ignore
+import { useI18n } from 'vue-i18n'
+
+// @ts-expect-error 忽略
+import * as mqtt from 'mqtt/dist/mqtt.min'
+
+const connection = {
+  host: '192.168.1.126',
+  port: 8083,
+  endpoint: '/mqtt',
+  clean: true, // 保留会话
+  connectTimeout: 4000, // 超时时间
+  reconnectPeriod: 4000, // 重连时间间隔
+  clientId: 'q_mqtt',
+  username: 'admin',
+  password: 'password',
+}
+
+const client = mqtt.connect('mqtt://test.mosquitto.org')
+// client.on('connect', function () {
+//   console.log('服务器连接成功')
+//   // client.subscribe('production_data')
+// })
+
+onMounted(() => {
+  // client.on('message', function (topic: any, message: any) {
+  //   console.log(topic)
+  //   console.log(message)
+  // })
+})
+// client.publish('myTopic', 'Hello MQTT')
+
+const { t } = useI18n()
 
 const formInitialData = () => {
   return {

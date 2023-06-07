@@ -9,7 +9,7 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <template v-for="(item, index) in dropdownItems" :key="index">
+          <template v-for="(item, index) in dropdownItems">
             <el-dropdown-item
               :command="item.command"
               :divided="index === dropdownItems.length - 1"
