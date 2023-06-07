@@ -4,6 +4,10 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<!-- <script setup lang="ts">
+import MqttDemo from './components/MqttDemo.vue'
+</script>
 
-<style scoped lang="scss"></style>
+<template>
+  <MqttDemo />
+</template> -->

@@ -21,34 +21,16 @@ import { ref, onMounted } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 
-// @ts-expect-error 忽略
-import * as mqtt from 'mqtt/dist/mqtt.min'
+import useMqtt from '@/hook/useMqtt'
+const { startMqtt } = useMqtt()
 
-const connection = {
-  host: '192.168.1.126',
-  port: 8083,
-  endpoint: '/mqtt',
-  clean: true, // 保留会话
-  connectTimeout: 4000, // 超时时间
-  reconnectPeriod: 4000, // 重连时间间隔
-  clientId: 'q_mqtt',
-  username: 'admin',
-  password: 'password',
-}
-
-const client = mqtt.connect('mqtt://test.mosquitto.org')
-// client.on('connect', function () {
-//   console.log('服务器连接成功')
-//   // client.subscribe('production_data')
-// })
-
-onMounted(() => {
-  // client.on('message', function (topic: any, message: any) {
-  //   console.log(topic)
-  //   console.log(message)
-  // })
+startMqtt('主题topic', (topic, message) => {
+  console.log(topic)
+  const msg = JSON.parse(message.toString())
+  console.log(msg)
 })
-// client.publish('myTopic', 'Hello MQTT')
+
+onMounted(() => {})
 
 const { t } = useI18n()
 
