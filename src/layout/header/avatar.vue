@@ -49,7 +49,7 @@ const logout = () => {
   $userStore.token = ''
   localStorage.removeItem('TOKEN')
   $router.replace('/login')
-  ElMessage('注销成功')
+  ElMessage.success('注销成功')
 }
 const dropdownItems = ref([
   {

@@ -45,12 +45,14 @@ import { useFullscreen } from '@vueuse/core'
 import IconSwitch from './icon-switch.vue'
 import Avatar from './avatar.vue'
 import useLocale from '@/hook/useLocale'
+import { useRouter } from 'vue-router'
 
 const { isFullscreen, toggle } = useFullscreen()
 const inputValue = ref('')
 const isDark = ref(false)
 
 const { currentLocale, setLocale } = useLocale()
+const $router = useRouter()
 
 const dropdownItems = ref([
   {
@@ -65,5 +67,6 @@ const dropdownItems = ref([
 const handleCommand = (command: string) => {
   if (currentLocale.value === command) return
   setLocale(command)
+  $router.go(0)
 }
 </script>

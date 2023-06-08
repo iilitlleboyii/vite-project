@@ -40,6 +40,4 @@ app
   .use(globalComponent)
   .use(i18n)
 
-setTimeout(() => {
-  app.mount('#app')
-}, 1000 * 1.5)
+app.mount('#app')

@@ -30,6 +30,5 @@ const xlink_href = computed(() => {
 .use-svg {
   width: 1em;
   height: 1em;
-  cursor: pointer;
 }
 </style>
