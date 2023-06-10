@@ -6,32 +6,24 @@
       :handleSearch="handleSearch"
       :resetForm="resetForm"
     />
-    <!-- <component
-      :is="config[4].name"
-      v-bind="config[4].bindProps ? config[4].bindProps : {}"
-      v-model="formRef[config[4].key as keyof typeof formRef]"
-      v-on="config[4].events ? config[4].events : {}"
-    ></component> -->
     <br />
     <p>{{ t('hello') }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 
-// import useMqtt from '@/hook/useMqtt'
-// const { startMqtt } = useMqtt()
+// import useMqtt from '@/hooks/useMqtt'
+// const { startMqtt, PublicMqtt } = useMqtt()
 
-// startMqtt('主题topic', (topic, message) => {
+// startMqtt('production_data2', (topic, message) => {
 //   console.log(topic)
 //   const msg = JSON.parse(message.toString())
 //   console.log(msg)
 // })
-
-onMounted(() => {})
 
 const { t } = useI18n()
 

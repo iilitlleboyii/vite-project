@@ -15,9 +15,12 @@
                 v-model="formRef[item.key]"
                 v-on="item.events ? item.events : {}"
               >
-                <template v-if="item.slot && item.slot.name === 'el-option'">
+                <template
+                  #default
+                  v-if="item.slot && item.slot.name === 'el-option'"
+                >
                   <el-option
-                    v-for="option in item.slot.value"
+                    v-for="option in item.slot?.value"
                     :key="option.value"
                     :label="option.label"
                     :value="option.value"
@@ -27,18 +30,6 @@
             </el-form-item>
           </el-col>
         </template>
-        <!-- 测试：单独拎出来是正常显示的 -->
-        <el-col :lg="6" :md="8" :sm="12" :xs="24">
-          <el-form-item label="测试">
-            <component
-              :is="config[4].name"
-              v-bind="config[4].bindProps ? config[4].bindProps : {}"
-              v-model="formRef[config[4].key as keyof typeof formRef]"
-              v-on="config[4].events ? config[4].events : {}"
-            ></component>
-          </el-form-item>
-        </el-col>
-        <!-- ----------------- -->
         <el-col
           :lg="isCollapse ? 6 : 24 - (config.length % 4) * 6"
           :md="isCollapse ? 8 : 24 - (config.length % 3) * 8"

@@ -44,7 +44,7 @@ import { ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
 import IconSwitch from './icon-switch.vue'
 import Avatar from './avatar.vue'
-import useLocale from '@/hook/useLocale'
+import useLocale from '@/hooks/useLocale'
 import { useRouter } from 'vue-router'
 
 const { isFullscreen, toggle } = useFullscreen()

@@ -8,19 +8,21 @@ class MQTT {
   constructor(topic: string) {
     this.topic = topic
     // 虽然是mqtt但是在客户端这里必须采用websock的链接方式
-    this.url = 'ws://test.mosquitto.org:8080/mqtt'
+    // this.url = 'ws://test.mosquitto.org:8080/mqtt'
+    this.url = 'ws://192.168.1.126:8083/mqtt'
   }
 
   //初始化mqtt
   init() {
     const options = {
       clean: true,
-      // clientId: '111',
-      // password: '111',
-      // username: '1111',
+      clientId: 'q_mqtt',
+      password: 'password',
+      username: 'username',
       connectTimeout: 4000, // 超时时间
     }
     this.client = mqtt.connect(this.url, options)
+
     this.client.on('error', (error: any) => {
       console.log(error)
     })
@@ -50,11 +52,15 @@ class MQTT {
       })
     })
   }
-  //收到的消息
+  // 发送消息
+  post(topic: string, message: string) {
+    this.client.publish(topic, message)
+  }
+  // 收到的消息
   get(callback: OnMessageCallback) {
     this.client.on('message', callback)
   }
-  //结束链接
+  // 结束链接
   over() {
     this.client.end()
   }
