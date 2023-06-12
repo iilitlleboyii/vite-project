@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 搜索栏 -->
     <search-bar
       v-model:formRef="formRef"
       :config="config"
@@ -16,15 +17,6 @@ import { ref } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 
-// import useMqtt from '@/hooks/useMqtt'
-// const { startMqtt, PublicMqtt } = useMqtt()
-
-// startMqtt('production_data2', (topic, message) => {
-//   console.log(topic)
-//   const msg = JSON.parse(message.toString())
-//   console.log(msg)
-// })
-
 const { t } = useI18n()
 
 const formInitialData = () => {
@@ -35,6 +27,7 @@ const formInitialData = () => {
     companyId: '',
     moduleName: '',
     createTime: '',
+    autocomplete: '',
   }
 }
 const formRef = ref(formInitialData())
@@ -97,6 +90,34 @@ const cascaderOptions = [
     ],
   },
 ]
+
+const loadAll = () => {
+  return [
+    { value: 'vue', link: 'https://github.com/vuejs/vue' },
+    { value: 'element', link: 'https://github.com/ElemeFE/element' },
+    { value: 'cooking', link: 'https://github.com/ElemeFE/cooking' },
+    { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
+    { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
+    { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
+    { value: 'babel', link: 'https://github.com/babel/babel' },
+  ]
+}
+const restaurants = ref(loadAll())
+const createFilter = (queryString: string) => {
+  return (restaurant: { value: string; link: string }) => {
+    return (
+      restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    )
+  }
+}
+const querySearch = (queryString: string, cb: any) => {
+  const results = queryString
+    ? restaurants.value.filter(createFilter(queryString))
+    : restaurants.value
+  // call callback function to return suggestions
+  cb(results)
+}
+
 const config = ref([
   {
     name: 'el-input',
@@ -156,6 +177,20 @@ const config = ref([
     bindProps: {
       type: 'datetime',
       placeholder: 'Select date and time',
+    },
+  },
+  {
+    name: 'el-autocomplete',
+    label: '自动补全',
+    key: 'autocomplete',
+    bindProps: {
+      placeholder: '请输入内容',
+      fetchSuggestions: querySearch,
+    },
+    events: {
+      select: (val: any) => {
+        console.log(val)
+      },
     },
   },
 ])

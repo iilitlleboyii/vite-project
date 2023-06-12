@@ -50,6 +50,9 @@
   &.is-active {
     color: $menu-tc-active !important;
   }
+  span {
+    user-select: none;
+  }
 }
 .el-sub-menu {
   background-color: $menu-bgc !important;
@@ -57,6 +60,9 @@
     color: $menu-tc;
     &:hover {
       background-color: $menu-bgc-hover !important;
+    }
+    span {
+      user-select: none;
     }
   }
   .el-menu-item {
